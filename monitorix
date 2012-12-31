@@ -187,8 +187,9 @@ sub create_index {
  <head>
   <title>$TITLE</title>
   <link rel="shortcut icon" href="$FAVICON">
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
  </head>
- <body bgcolor="$bgcolor" text="#888888" vlink="#888888" link="#888888">
+ <body>
   <center>
   <p>
   <br>
@@ -207,18 +208,14 @@ sub create_index {
   </table>
   <p>
   <form action="$BASE_CGI/monitorix.cgi" method="get">
-    <table cellspacing="5" cellpadding="0" bgcolor="$table_back_color" border="1">
+    <table cellspacing="5" cellpadding="0">
       <tr>
-        <td bgcolor="$title_back_color">
-          <font color="$title_fore_color">
+        <td>
 <b>&nbsp;Hostname&nbsp;</b>
-          </font>
        </td>
-        <td bgcolor="$title_back_color">
-          <font color="$title_fore_color">
-<b>&nbsp;Graph&nbsp;</b>
-          </font>
-       </td>
+        <td>
+ <b>&nbsp;Graph&nbsp;</b>
+        </td>
      </tr>
       <tr>
 EOF
@@ -226,7 +223,7 @@ EOF
 	if(!$FAVICON) {
 		logger("WARNING: the option \$FAVICON is missing in your configuration file. Do you really have the latest version?");
 	}
-	print(OUT "        <td bgcolor='$bgcolor'>\n");
+	print(OUT "        <td>\n");
 	print(OUT "          <select name='mode' size='1'>\n");
 	print(OUT "            <option value='localhost'>Local Host</option>\n");
 	if(scalar(@REMOTEHOST_LIST) && $MULTIHOST eq "Y") {
@@ -261,7 +258,7 @@ EOF
 
 
 
-	print(OUT "        <td bgcolor='$bgcolor'>\n");
+	print(OUT "        <td>\n");
 	print(OUT "          <select name='graph' size='1'>\n");
 	print(OUT "            <option value='all'>All graphs</option>\n");
 	foreach my $g (@GRAPH_NAME) {
@@ -320,28 +317,29 @@ EOF
      </tr>
     </table>
     <p>
-    <table cellspacing="5" cellpadding="0" bgcolor="$table_back_color" border="1">
+    <table cellspacing="5" cellpadding="0">
      <tr>
-        <td bgcolor="$title_back_color">
+        <td>
           <input type="radio" checked name="when" value="1day">
-            <font color="$title_fore_color"><b>Daily&nbsp;</b></font>
+            <b>Daily&nbsp;</b>
         </td>
-        <td bgcolor="$title_back_color">
+        <td>
           <input type="radio" name="when" value="1week">
-            <font color="$title_fore_color"><b>Weekly&nbsp;</b></font>
+            <b>Weekly&nbsp;</b>
         </td>
-        <td bgcolor="$title_back_color">
+        <td>
           <input type="radio" name="when" value="1month">
-            <font color="$title_fore_color"><b>Monthly&nbsp;</b></font>
+			<b>Monthly&nbsp;</b>
         </td>
-        <td bgcolor="$title_back_color">
+        <td>
           <input type="radio" name="when" value="1year">
-            <font color="$title_fore_color"><b>Yearly&nbsp;</b></font>
+            <b>Yearly&nbsp;</b>
         </td>
       </tr>
     </table>
     <p>
-    <input type="hidden" name="color" value="$THEME_COLOR">
+<!-- <input type="hidden" name="color" value="$THEME_COLOR"> -->
+	<input type="hidden" name="color" value="white">
     <input type="submit" value="    Ok    ">
   </form>
   </font>
@@ -2293,14 +2291,8 @@ sub fs_init {
 					}
 				}
 			} elsif($os eq "FreeBSD" || $os eq "OpenBSD" || $os eq "NetBSD") {
-				# remove the /dev/ prefix
-				if ($d =~ s/^.*dev\///) {
-					# not ZFS; get the device name, eg ada0; md0; ad10
-					$d =~ s/^(\D+\d*)\D.*/\1/;	
-				} else {
-					# Just take ZFS pool name
-					$d =~ s,^([^/]*)/.*,\1,;
-				}
+				$d =~ s/^.*dev\///;	# remove the /dev/ prefix
+				$d =~ s/^(...).*/\1/;	# get the first 3 chars
 			}
 			$FS_DEV{$fs} = $d;
 			logger("$myself: Detected physical device name for $fs in '$d'.") unless !$opt_d;
@@ -5271,7 +5263,6 @@ sub nfss_update {
 			if(/^rpc\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/) {
 				@rpc = ($1, $2, $3, $4, $5);
 			}
-			$NFSS_VERSION = "4ops" if $NFSS_VERSION eq "4";
 			if(/^proc$NFSS_VERSION /) {
 				my @tmp = split(' ', $_);
 				(undef, undef, @nfss) = @tmp;
@@ -7002,5 +6993,5 @@ logger("Ok, done.") unless !$opt_d;
 
 alarm(1);
 while(1) {
-        pause();
+        sleep(1);
 }

@@ -89,11 +89,16 @@ our ($res, $tc, $tb, $ts);
 # Default colors (white theme)
 our @graph_colors;
 our $warning_color = "--color=CANVAS#880000";
-our $bg_color = "#FFFFFF";
-our $fg_color = "#000000";
-our $title_bg_color = "#777777";
-our $title_fg_color = "#CCCC00";
-our $graph_bg_color = "#CCCCCC";
+# our $bg_color = "#FFFFFF";
+# our $fg_color = "#000000";
+# our $title_bg_color = "#777777";
+# our $title_fg_color = "#CCCC00";
+# our $graph_bg_color = "#CCCCCC";
+our $bg_color = "";
+our $fg_color = "";
+our $title_bg_color = "";
+our $title_fg_color = "";
+our $graph_bg_color = "";
 
 if($color) {
 	if($color eq "black") {
@@ -236,7 +241,7 @@ sub system {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$SYSTEM_RRD",
 			"--start=-$nwhen$twhen",
@@ -293,7 +298,7 @@ sub system {
 
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	push(@tmp, "AREA:load1#4444EE: 1 min average");
 	push(@tmp, "GPRINT:load1:LAST:  Current\\: %4.2lf");
@@ -378,7 +383,7 @@ sub system {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td>\n");
 	}
 
 	undef(@riglim);
@@ -607,7 +612,7 @@ sub kern {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$KERN_RRD",
 			"--start=-$nwhen$twhen",
@@ -844,7 +849,7 @@ sub kern {
 
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	($width, $height) = split('x', $GRAPH_SIZE{main});
 	if($silent =~ /imagetag/) {
@@ -917,7 +922,7 @@ sub kern {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@tmp);
@@ -1123,7 +1128,7 @@ sub proc {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$PROC_RRD",
 			"--start=-$nwhen$twhen",
@@ -1202,7 +1207,7 @@ sub proc {
 		for($n2 = 0; $n2 < $PROC_PER_ROW; $n2++) {
 			last unless $n < $ncpu;
 			if($title) {
-				print("    <td bgcolor='" . $title_bg_color . "'>\n");
+				print("    <td>\n");
 			}
 			undef(@tmp);
 			undef(@tmpz);
@@ -1547,7 +1552,7 @@ sub hptemp {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$HPTEMP_RRD",
 			"--start=-$nwhen$twhen",
@@ -1614,7 +1619,7 @@ sub hptemp {
 	if($title) {
 		graph_header($title, 2);
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 
 	if(scalar(@HPTEMP_1)) {
@@ -1709,7 +1714,7 @@ sub hptemp {
 
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	if(scalar(@HPTEMP_2)) {
@@ -1960,7 +1965,7 @@ sub lmsens {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$LMSENS_RRD",
 			"--start=-$nwhen$twhen",
@@ -2128,7 +2133,7 @@ sub lmsens {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td valign='bottom' bgcolor='$title_bg_color'>\n");
+		print("    <td valign='bottom'>\n");
 	}
 	($width, $height) = split('x', $GRAPH_SIZE{main});
 	if($silent =~ /imagetag/) {
@@ -2349,7 +2354,7 @@ sub lmsens {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@tmp);
@@ -2676,7 +2681,7 @@ sub nvidia {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$NVIDIA_RRD",
 			"--start=-$nwhen$twhen",
@@ -2744,7 +2749,7 @@ sub nvidia {
 
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	($width, $height) = split('x', $GRAPH_SIZE{main});
 	if($silent =~ /imagetag/) {
@@ -2816,7 +2821,7 @@ sub nvidia {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@tmp);
@@ -3067,7 +3072,7 @@ sub disk {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$DISK_RRD",
 			"--start=-$nwhen$twhen",
@@ -3166,7 +3171,7 @@ sub disk {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{main});
 		if($silent =~ /imagetag/) {
@@ -3237,7 +3242,7 @@ sub disk {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@tmp);
@@ -3455,7 +3460,7 @@ sub fs {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$FS_RRD",
 			"--start=-$nwhen$twhen",
@@ -3567,7 +3572,7 @@ sub fs {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{main});
 		if($silent =~ /imagetag/) {
@@ -3642,7 +3647,7 @@ sub fs {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@riglim);
@@ -3968,7 +3973,7 @@ sub net {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$NET_RRD",
 			"--start=-$nwhen$twhen",
@@ -4050,7 +4055,7 @@ sub net {
 			}
 			graph_header($NET_LIST[$n] . " " . $title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 
 		undef(@riglim);
@@ -4157,7 +4162,7 @@ sub net {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@tmp);
@@ -4349,7 +4354,7 @@ sub serv {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$SERV_RRD",
 			"--start=-$nwhen$twhen",
@@ -4535,7 +4540,7 @@ sub serv {
 
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	($width, $height) = split('x', $GRAPH_SIZE{main});
 	if($silent =~ /imagetag/) {
@@ -4621,7 +4626,7 @@ sub serv {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@tmp);
@@ -4877,7 +4882,7 @@ sub mail {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$MAIL_RRD",
 			"--start=-$nwhen$twhen",
@@ -5046,7 +5051,7 @@ sub mail {
 
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 
 	undef(@riglim);
@@ -5243,7 +5248,7 @@ sub mail {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -5532,7 +5537,7 @@ sub port {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$PORT_RRD",
 			"--start=-$nwhen$twhen",
@@ -5606,7 +5611,7 @@ sub port {
 		for($n2 = 0; $n2 < $PORT_PER_ROW; $n2++) {
 			last unless ($n < $PORT_MAX && $n < scalar(@PORT_LIST));
 			if($title) {
-				print("    <td bgcolor='" . $title_bg_color . "'>\n");
+				print("    <td>\n");
 			}
 			undef(@riglim);
 			if($PORT_RIGID[$n] eq 1) {
@@ -5785,7 +5790,7 @@ sub user {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$USER_RRD",
 			"--start=-$nwhen$twhen",
@@ -5828,7 +5833,7 @@ sub user {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	push(@tmp, "AREA:sys#44EE44:Logged In");
 	push(@tmp, "GPRINT:sys:LAST:        Current\\: %3.0lf");
@@ -5895,7 +5900,7 @@ sub user {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -6080,7 +6085,7 @@ sub apache {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$APACHE_RRD",
 			"--start=-$nwhen$twhen",
@@ -6162,7 +6167,7 @@ sub apache {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		undef(@tmp);
 		undef(@tmpz);
@@ -6245,7 +6250,7 @@ sub apache {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@riglim);
@@ -6401,7 +6406,7 @@ sub apache {
 			print("    </tr>\n");
 
 			print("    <tr>\n");
-			print "      <td bgcolor='$title_bg_color' colspan='2'>\n";
+			print "      <td>\n";
 			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$url<b>\n";
@@ -6459,7 +6464,7 @@ sub nginx {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$NGINX_RRD",
 			"--start=-$nwhen$twhen",
@@ -6508,7 +6513,7 @@ sub nginx {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	push(@tmp, "AREA:total#44EEEE:Total");
 	push(@tmp, "GPRINT:total:LAST:       Current\\: %5.0lf");
@@ -6604,7 +6609,7 @@ sub nginx {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -6848,7 +6853,7 @@ sub lighttpd {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$LIGHTTPD_RRD",
 			"--start=-$nwhen$twhen",
@@ -6930,7 +6935,7 @@ sub lighttpd {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		undef(@tmp);
 		undef(@tmpz);
@@ -7013,7 +7018,7 @@ sub lighttpd {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@riglim);
@@ -7177,7 +7182,7 @@ sub lighttpd {
 			print("    </tr>\n");
 
 			print("    <tr>\n");
-			print "      <td bgcolor='$title_bg_color' colspan='2'>\n";
+			print "      <td>\n";
 			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$url<b>\n";
@@ -7233,7 +7238,7 @@ sub mysql {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$MYSQL_RRD",
 			"--start=-$nwhen$twhen",
@@ -7325,7 +7330,7 @@ sub mysql {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td valign='top' bgcolor='$title_bg_color'>\n");
+			print("    <td valign='top'>\n");
 		}
 		undef(@tmp);
 		undef(@tmpz);
@@ -7559,7 +7564,7 @@ sub mysql {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@riglim);
@@ -7910,7 +7915,7 @@ sub mysql {
 			print("    </tr>\n");
 
 			print("    <tr>\n");
-			print "      <td bgcolor='$title_bg_color' colspan='2'>\n";
+			print "      <td>\n";
 			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$str<b>\n";
@@ -8010,7 +8015,7 @@ sub squid {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$SQUID_RRD",
 			"--start=-$nwhen$twhen",
@@ -8133,7 +8138,7 @@ sub squid {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td valign='top' bgcolor='$title_bg_color'>\n");
+		print("    <td valign='top'>\n");
 	}
 	for($n = 0, $i = 1; $n < 9; $n++, $i++) {
 		if($SQUID_GRAPH_1[$n]) {
@@ -8416,7 +8421,7 @@ sub squid {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -9037,7 +9042,7 @@ sub nfss {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$NFSS_RRD",
 			"--start=-$nwhen$twhen",
@@ -9119,7 +9124,7 @@ sub nfss {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td valign='top' bgcolor='$title_bg_color'>\n");
+		print("    <td valign='top'>\n");
 	}
 	for($n = 0; $n < 10; $n++) {
 		if(grep {$_ eq $NFSS_GRAPH_1[$n]} @nfsv) {
@@ -9351,7 +9356,7 @@ sub nfss {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -10010,7 +10015,7 @@ sub nfsc {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$NFSC_RRD",
 			"--start=-$nwhen$twhen",
@@ -10072,7 +10077,7 @@ sub nfsc {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td valign='top' bgcolor='$title_bg_color'>\n");
+		print("    <td valign='top'>\n");
 	}
 	for($n = 0; $n < 10; $n++) {
 		if(grep {$_ eq $NFSC_GRAPH_1[$n]} @nfsv) {
@@ -10224,7 +10229,7 @@ sub nfsc {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -10634,7 +10639,7 @@ sub bind {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$BIND_RRD",
 			"--start=-$nwhen$twhen",
@@ -10836,7 +10841,7 @@ sub bind {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 7]",
@@ -10954,7 +10959,7 @@ sub bind {
 			push(@tmp, "COMMENT: \\n");
 		}
 		if($title) {
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 7 + 1]",
@@ -11070,7 +11075,7 @@ sub bind {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 7 + 2]",
@@ -11188,7 +11193,7 @@ sub bind {
 			push(@tmp, "COMMENT: \\n");
 		}
 		if($title) {
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 7 + 3]",
@@ -11304,7 +11309,7 @@ sub bind {
 		}
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 7 + 4]",
@@ -11414,7 +11419,7 @@ sub bind {
 		push(@tmp, "GPRINT:mem_l_mb" . ":LAST:     Cur\\:%6.1lf MB\\n");
 		push(@tmpz, "LINE2:mem_l#EE4444:Lost");
 		if($title) {
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium2});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 7 + 5]",
@@ -11543,7 +11548,7 @@ sub bind {
 			print("    </tr>\n");
 
 			print("    <tr>\n");
-			print "      <td bgcolor='$title_bg_color' colspan='2'>\n";
+			print "      <td>\n";
 			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b>&nbsp;&nbsp;<a href='" . $host . "' style='{color: $title_fg_color}'>$host</a><b>\n";
@@ -11597,7 +11602,7 @@ sub ntp {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$NTP_RRD",
 			"--start=-$nwhen$twhen",
@@ -11714,7 +11719,7 @@ sub ntp {
 		push(@tmpz, "LINE2:ntp" . $e . "_jit#EE4444:Jitter");
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{main});
 		if($silent =~ /imagetag/) {
@@ -11775,7 +11780,7 @@ sub ntp {
 		}
 		if($title) {
 			print("    </td>\n");
-			print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td valign='top'>\n");
 		}
 
 		undef(@riglim);
@@ -11939,7 +11944,7 @@ sub ntp {
 			print("    </tr>\n");
 	
 			print("    <tr>\n");
-			print "      <td bgcolor='$title_bg_color' colspan='2'>\n";
+			print "      <td>\n";
 			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$host<b>\n";
@@ -11987,7 +11992,7 @@ sub fail2ban {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$FAIL2BAN_RRD",
 			"--start=-$nwhen$twhen",
@@ -12078,7 +12083,7 @@ sub fail2ban {
 		for($n2 = 0; $n2 < $FAIL2BAN_PER_ROW; $n2++) {
 			last unless $n < scalar(@FAIL2BAN_LIST);
 			if($title) {
-				print("    <td bgcolor='" . $title_bg_color . "'>\n");
+				print("    <td>\n");
 			}
 			undef(@tmp);
 			undef(@tmpz);
@@ -12228,7 +12233,7 @@ sub icecast {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$ICECAST_RRD",
 			"--start=-$nwhen$twhen",
@@ -12356,7 +12361,7 @@ sub icecast {
 
 		if($title) {
 			print("    <tr>\n");
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . "$PNG[$e * 2]",
@@ -12448,7 +12453,7 @@ sub icecast {
 		}
 
 		if($title) {
-			print("    <td bgcolor='" . $title_bg_color . "'>\n");
+			print("    <td>\n");
 		}
 		($width, $height) = split('x', $GRAPH_SIZE{medium});
 		RRDs::graph("$PNG_DIR" . $PNG[$e * 2 + 1],
@@ -12517,7 +12522,7 @@ sub icecast {
 			print("    </tr>\n");
 	
 			print("    <tr>\n");
-			print "      <td bgcolor='$title_bg_color' colspan='2'>\n";
+			print "      <td>\n";
 			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b>&nbsp;&nbsp;<a href='" . $url . "' style='{color: $title_fg_color}'>$url</a><b>\n";
@@ -13008,7 +13013,7 @@ sub int {
 		if($title) {
 			graph_header($title, 2);
 			print("    <tr>\n");
-			print("    <td bgcolor='$title_bg_color'>\n");
+			print("    <td>\n");
 		}
 		my (undef, undef, undef, $data) = RRDs::fetch("$INT_RRD",
 			"--start=-$nwhen$twhen",
@@ -13101,7 +13106,7 @@ sub int {
 	}
 	if($title) {
 		print("    <tr>\n");
-		print("    <td bgcolor='$title_bg_color'>\n");
+		print("    <td>\n");
 	}
 	($width, $height) = split('x', $GRAPH_SIZE{main});
 	if($silent =~ /imagetag/) {
@@ -13157,7 +13162,7 @@ sub int {
 	}
 	if($title) {
 		print("    </td>\n");
-		print("    <td valign='top' bgcolor='" . $title_bg_color . "'>\n");
+		print("    <td valign='top'>\n");
 	}
 
 	undef(@riglim);
@@ -13334,11 +13339,11 @@ sub multihost {
 
 	if($val eq "all" || $val =~ m/group[0-9]*/) {
 		for($n = 0; $n < scalar(@HOST); $n += $MULTIHOST_IMGS_PER_ROW) {
-			print "<table cellspacing='5' cellpadding='0' width='1' bgcolor='$graph_bg_color' border='1'>\n";
+			print "<table cellspacing='5' cellpadding='0' width='1'>\n";
 			print " <tr>\n";
 			for($n2 = 0; $n2 < $MULTIHOST_IMGS_PER_ROW; $n2++) {
 				if($n < scalar(@HOST)) {
-					print "  <td bgcolor='$title_bg_color'>\n";
+					print "  <td>\n";
 					print "   <font face='Verdana, sans-serif' color='$fg_color'>\n";
 					print "   <b>&nbsp;&nbsp;" . $HOST[$n] . "<b>\n";
 					print "   </font>\n";
@@ -13350,7 +13355,7 @@ sub multihost {
 			print " <tr>\n";
 			for($n2 = 0, $n = $n - $MULTIHOST_IMGS_PER_ROW; $n2 < $MULTIHOST_IMGS_PER_ROW; $n2++) {
 				if($n < scalar(@HOST)) {
-					print "  <td bgcolor='$title_bg_color' style='vertical-align: top; height: 10%; width: 10%;'>\n";
+					print "  <td>\n";
 					print "   <iframe src=$URL[$n]$BASE_CGI/monitorix.cgi?mode=localhost&when=$when&graph=$graph&color=$color&silent=imagetag height=201 width=397 frameborder=0 marginwidth=0 marginheight=0 scrolling=no></iframe>\n";
 					print "  </td>\n";
 
@@ -13362,7 +13367,7 @@ sub multihost {
 			for($n2 = 0, $n = $n - $MULTIHOST_IMGS_PER_ROW; $n2 < $MULTIHOST_IMGS_PER_ROW; $n2++) {
 				if($n < scalar(@HOST)) {
 				if($MULTIHOST_FOOTER) {
-					print "  <td bgcolor='$title_bg_color'>\n";
+					print "  <td>\n";
 					print "   <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 					print "   <font size='-1'>\n";
 					print "    <b>&nbsp;&nbsp;<a href='" . $URL[$n] . $BASE_URL . "/' style='{color: $title_fg_color}'>$URL[$n]</a><b>\n";
@@ -13378,22 +13383,22 @@ sub multihost {
 			print "<br>\n";
 		}
 	} else {
-		print "  <table cellspacing='5' cellpadding='0' width='1' bgcolor='$graph_bg_color' border='1'>\n";
+		print "  <table cellspacing='5' cellpadding='0' width='1'>\n";
 		print "   <tr>\n";
-		print "    <td bgcolor='$title_bg_color'>\n";
+		print "    <td>\n";
 		print "    <font face='Verdana, sans-serif' color='$fg_color'>\n";
 		print "    <b>&nbsp;&nbsp;" . $HOST[$val] . "<b>\n";
 		print "    </font>\n";
 		print "    </td>\n";
 		print "   </tr>\n";
 		print "   <tr>\n";
-		print "    <td bgcolor='$title_bg_color' style='vertical-align: top; height: 10%; width: 10%;'>\n";
+		print "    <td>\n";
 		print "     <iframe src=$URL[$val]$BASE_CGI/monitorix.cgi?mode=localhost&when=$when&graph=$graph&color=$color&silent=imagetagbig height=249 width=545 frameborder=0 marginwidth=0 marginheight=0 scrolling=no></iframe>\n";
 		print "    </td>\n";
 		print "   </tr>\n";
 		print "   <tr>\n";
 		if($MULTIHOST_FOOTER) {
-			print "   <td bgcolor='$title_bg_color'>\n";
+			print "   <td>\n";
 			print "    <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
 			print "    <font size='-1'>\n";
 			print "    <b>&nbsp;&nbsp;<a href='" . $URL[$val] . "/monitorix/' style='{color: $title_fg_color}'>$URL[$val]</a><b>\n";
@@ -13447,9 +13452,9 @@ sub pc {
 	}
 	$PC_IMGS_PER_ROW = 1 unless $PC_IMGS_PER_ROW > 1;
 	if($val eq "all") {
-		print("  <table cellspacing='5' cellpadding='0' width='1' bgcolor='$graph_bg_color' border='1'>\n");
+		print("  <table cellspacing='5' cellpadding='0' width='1'>\n");
 		print("  <tr>\n");
-		print("  <td bgcolor='$title_bg_color' colspan='" . $PC_IMGS_PER_ROW  . "'>\n");
+		print("  <td>\n");
 		print("  <font face='Verdana, sans-serif' color='$title_fg_color'>\n");
 		print("    <b>&nbsp;&nbsp;Internet traffic and usage<b>\n");
 		print("  </font>\n");
@@ -13461,7 +13466,7 @@ sub pc {
 			print("  <tr>\n");
 			for($n2 = 0; $n2 < $PC_IMGS_PER_ROW; $n2++) {
 				last unless ($n < $PC_MAX && $n < scalar(@PC_LIST));
-				print("  <td bgcolor='$title_bg_color'>\n");
+				print("  <td>\n");
 				undef(@tmp);
 				undef(@tmpz);
 				undef(@CDEF);
@@ -13543,16 +13548,16 @@ sub pc {
 	} else {
 		return unless $PC_LIST[$val];
 		if(!$silent) {
-			print("  <table cellspacing='5' cellpadding='0' width='1' bgcolor='$graph_bg_color' border='1'>\n");
+			print("  <table cellspacing='5' cellpadding='0' width='1'>\n");
 			print("  <tr>\n");
-			print("  <td bgcolor='$title_bg_color' colspan='1'>\n");
+			print("  <td>\n");
 			print("  <font face='Verdana, sans-serif' color='$title_fg_color'>\n");
 			print("    <b>&nbsp;&nbsp;Internet traffic and usage<b>\n");
 			print("  </font>\n");
 			print("  </td>\n");
 			print("  </tr>\n");
 			print("  <tr>\n");
-			print("  <td bgcolor='$title_bg_color'>\n");
+			print("  <td>\n");
 		}
 		undef(@tmp);
 		undef(@tmpz);
@@ -13648,9 +13653,9 @@ sub pc {
 sub graph_header {
 	my ($title, $colspan) = @_;
 	print("\n");
-	print("  <table cellspacing='5' cellpadding='0' width='1' bgcolor='$graph_bg_color' border='1'>\n");
+	print("  <table cellspacing='5' cellpadding='0' width='1'>\n");
 	print("    <tr>\n");
-	print("      <td bgcolor='$title_bg_color' colspan='$colspan'>\n");
+	print("      <td>\n");
 	print("        <font face='Verdana, sans-serif' color='$title_fg_color'>\n");
 	print("          <b>&nbsp;&nbsp;$title<b>\n");
 	print("        </font>\n");
@@ -13679,12 +13684,12 @@ if(!$silent) {
 		print("    <meta http-equiv='Refresh' content='" . $REFRESH_RATE . "'>\n");
 	}
 	print("  </head>\n");
-	print("  <body bgcolor='" . $bg_color . "' vlink='#888888' link='#888888'>\n");
+	print("  <body>\n");
 	print("  <center>\n");
-	print("  <table cellspacing='5' cellpadding='0' bgcolor='" . $graph_bg_color . "' border='1'>\n");
+	print("  <table cellspacing='5' cellpadding='0'>\n");
 	print("  <tr>\n");
 	if(($val ne "all" || $val ne "group") && $mode ne "multihost") {
-		print("  <td bgcolor='" . $title_bg_color . "'>\n");
+		print("  <td>\n");
 		print("  <font face='Verdana, sans-serif' color='" . $title_fg_color . "'>\n");
 		print("    <font size='5'><b>&nbsp;&nbsp;Host:&nbsp;<b></font>\n");
 		print("  </font>\n");
@@ -13693,13 +13698,13 @@ if(!$silent) {
 	if($val =~ m/group[0-9]+/) {
 		my $gnum = substr($val, 5, length($val));
 		my $gname = $REMOTEGROUP_LIST[2 * $gnum];
-		print("  <td bgcolor='" . $title_bg_color . "'>\n");
+		print("  <td>\n");
 		print("  <font face='Verdana, sans-serif' color='" . $title_fg_color . "'>\n");
 		print("    <font size='5'><b>&nbsp;&nbsp;$gname&nbsp;<b></font>\n");
 		print("  </font>\n");
 		print("  </td>\n");
 	}
-	print("  <td bgcolor='" . $bg_color . "'>\n");
+	print("  <td>\n");
 	print("  <font face='Verdana, sans-serif' color='" . $fg_color . "'>\n");
 	if($mode eq "localhost" || $mode eq "pc") {
 		$title = $HOSTNAME;
@@ -13718,11 +13723,11 @@ if(!$silent) {
 			$title = $rgraphs{$graph};
 		}
 	}
-	$title =~ s/ /&nbsp;/g;
+	$title =~ s/ /&nbsp;/g; #/for sublime_text_2 higtlight
 	print("    <font size='5'><b>&nbsp;&nbsp;$title&nbsp;&nbsp;</b></font>\n");
 	print("  </font>\n");
 	print("  </td>\n");
-		print("  <td bgcolor='" . $title_bg_color . "'>\n");
+		print("  <td>\n");
 		print("  <font face='Verdana, sans-serif' color='" . $title_fg_color . "'>\n");
 		print("    <font size='5'><b>&nbsp;&nbsp;last&nbsp;$twhen&nbsp;&nbsp;<b></font>\n");
 		print("  </font>\n");
