@@ -258,11 +258,11 @@ sub system {
 		my $time;
 		for($n = 0, $time = $tb; $n < ($tb * $ts); $n++) {
 			$line = @$data[$n];
-			my ($load1, $load5, $load15, $nproc, $npslp, $nprun, $mtotl, $buff, $cach, $free) = @$line;
+			my ($load_average_1m, $load_average_5m, $load_average_15m, $nproc, $npslp, $nprun, $mtotl, $buff, $cach, $free) = @$line;
 			$buff /= 1024;
 			$cach /= 1024;
 			$free /= 1024;
-			@row = ($load1, $load5, $load15, $MEMORY - $free, $cach, $buff, $nproc, $nprun);
+			@row = ($load_average_1m, $load_average_5m, $load_average_15m, $MEMORY - $free, $cach, $buff, $nproc, $nprun);
 			$time = $time - (1 / $ts);
 			printf(" %2d$tc   %4.1f  %4.1f  %4.1f  %6d  %6d  %6d   %5d %5d \n", $time, @row);
 		}
@@ -300,26 +300,26 @@ sub system {
 		print("    <tr>\n");
 		print("    <td>\n");
 	}
-	push(@tmp, "AREA:load1#4444EE: 1 min average");
-	push(@tmp, "GPRINT:load1:LAST:  Current\\: %4.2lf");
-	push(@tmp, "GPRINT:load1:AVERAGE:   Average\\: %4.2lf");
-	push(@tmp, "GPRINT:load1:MIN:   Min\\: %4.2lf");
-	push(@tmp, "GPRINT:load1:MAX:   Max\\: %4.2lf\\n");
-	push(@tmp, "LINE1:load1#0000EE");
-	push(@tmp, "LINE1:load5#EEEE00: 5 min average");
-	push(@tmp, "GPRINT:load5:LAST:  Current\\: %4.2lf");
-	push(@tmp, "GPRINT:load5:AVERAGE:   Average\\: %4.2lf");
-	push(@tmp, "GPRINT:load5:MIN:   Min\\: %4.2lf");
-	push(@tmp, "GPRINT:load5:MAX:   Max\\: %4.2lf\\n");
-	push(@tmp, "LINE1:load15#00EEEE:15 min average");
-	push(@tmp, "GPRINT:load15:LAST:  Current\\: %4.2lf");
-	push(@tmp, "GPRINT:load15:AVERAGE:   Average\\: %4.2lf");
-	push(@tmp, "GPRINT:load15:MIN:   Min\\: %4.2lf");
-	push(@tmp, "GPRINT:load15:MAX:   Max\\: %4.2lf\\n");
-	push(@tmpz, "AREA:load1#4444EE: 1 min average");
-	push(@tmpz, "LINE1:load1#0000EE");
-	push(@tmpz, "LINE1:load5#EEEE00: 5 min average");
-	push(@tmpz, "LINE1:load15#00EEEE:15 min average");
+	push(@tmp, "AREA:load_average_1m#4444EE: 1 min average");
+	push(@tmp, "GPRINT:load_average_1m:LAST:  Current\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_1m:AVERAGE:   Average\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_1m:MIN:   Min\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_1m:MAX:   Max\\: %4.2lf\\n");
+	push(@tmp, "LINE1:load_average_1m#0000EE");
+	push(@tmp, "LINE1:load_average_5m#EEEE00: 5 min average");
+	push(@tmp, "GPRINT:load_average_5m:LAST:  Current\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_5m:AVERAGE:   Average\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_5m:MIN:   Min\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_5m:MAX:   Max\\: %4.2lf\\n");
+	push(@tmp, "LINE1:load_average_15m#00EEEE:15 min average");
+	push(@tmp, "GPRINT:load_average_15m:LAST:  Current\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_15m:AVERAGE:   Average\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_15m:MIN:   Min\\: %4.2lf");
+	push(@tmp, "GPRINT:load_average_15m:MAX:   Max\\: %4.2lf\\n");
+	push(@tmpz, "AREA:load_average_1m#4444EE: 1 min average");
+	push(@tmpz, "LINE1:load_average_1m#0000EE");
+	push(@tmpz, "LINE1:load_average_5m#EEEE00: 5 min average");
+	push(@tmpz, "LINE1:load_average_15m#00EEEE:15 min average");
 	if($os eq "FreeBSD") {
 		push(@tmp, "COMMENT: \\n");
 	}
@@ -341,9 +341,9 @@ sub system {
 		"--lower-limit=0",
 		@VERSION12,
 		@graph_colors,
-		"DEF:load1=$SYSTEM_RRD:system_load1:AVERAGE",
-		"DEF:load5=$SYSTEM_RRD:system_load5:AVERAGE",
-		"DEF:load15=$SYSTEM_RRD:system_load15:AVERAGE",
+		"DEF:load_average_1m=$SYSTEM_RRD:load_average_1m:AVERAGE",
+		"DEF:load_average_5m=$SYSTEM_RRD:load_average_5m:AVERAGE",
+		"DEF:load_average_15m=$SYSTEM_RRD:load_average_15m:AVERAGE",
 		@tmp,
 		"COMMENT: \\n",
 		$UPTIMELINE);
@@ -362,9 +362,9 @@ sub system {
 			"--lower-limit=0",
 			@VERSION12,
 			@graph_colors,
-			"DEF:load1=$SYSTEM_RRD:system_load1:AVERAGE",
-			"DEF:load5=$SYSTEM_RRD:system_load5:AVERAGE",
-			"DEF:load15=$SYSTEM_RRD:system_load15:AVERAGE",
+			"DEF:load_average_1m=$SYSTEM_RRD:load_average_1m:AVERAGE",
+			"DEF:load_average_5m=$SYSTEM_RRD:load_average_5m:AVERAGE",
+			"DEF:load_average_15m=$SYSTEM_RRD:load_average_15m:AVERAGE",
 			@tmpz);
 		$err = RRDs::error;
 		print("ERROR: while graphing $PNG_DIR" . "$PNG1z: $err\n") if $err;

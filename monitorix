@@ -415,9 +415,9 @@ sub system_init {
 		eval {
 			RRDs::create($SYSTEM_RRD,
 				"--step=60",
-				"DS:system_load1:GAUGE:120:0:U",
-				"DS:system_load5:GAUGE:120:0:U",
-				"DS:system_load15:GAUGE:120:0:U",
+				"DS:load_average_1m:GAUGE:120:0:U",
+				"DS:load_average_5m:GAUGE:120:0:U",
+				"DS:load_average_15m:GAUGE:120:0:U",
 				"DS:system_nproc:GAUGE:120:0:U",
 				"DS:system_npslp:GAUGE:120:0:U",
 				"DS:system_nprun:GAUGE:120:0:U",

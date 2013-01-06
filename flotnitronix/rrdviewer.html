@@ -1,28 +1,10 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!--
- Example HTML/javascript file that display the
- content of a RRD archive file in a graph
- using the Flot libraries
- Part of the javascriptRRD package
- Copyright (c) 2010 Frank Wuerthwein, fkw@ucsd.edu
-                    Igor Sfiligoi, isfiligoi@ucsd.edu
-
- Original repository: http://javascriptrrd.sourceforge.net/
- 
- MIT License [http://www.opensource.org/licenses/mit-license.php]
-
--->
-
-<!--
- This page requires Flot.
-
- Repository: http://www.flotcharts.org/
- [Previous repository: http://code.google.com/p/flot/]
-
--->
-
 <html>
-  
+
+  <head>
+    <title>RRD Graphs with Flot</title>
+
     <script type="text/javascript" src="./jsrrd/binaryXHR.js"></script>
     <script type="text/javascript" src="./jsrrd/rrdFile.js"></script>
 
@@ -33,39 +15,14 @@
     <script type="text/javascript" src="./flot/jquery.flot.js"></script>
     <script type="text/javascript" src="./flot/jquery.flot.selection.js"></script>
     <script type="text/javascript" src="./flot/jquery.flot.tooltip.js"></script>
-  <head>
-    <title>RRD Graphs with Flot</title>
-  </head>
 
-  <body>
-    <h1 id="title">RRD Graphs with Flot</h1>
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
-   RRD Graphs:
-<!--     <input type="text" id="input_fname" value="example1.rrd"
-           onchange="fname_update()">
-     <button onclick="fname_update()">Update</button> -->
-
-  <select name="rrd file" style="width : 200" onchange="fname_update()" id="input_fname">
-    <option value="../lib/system.rrd"  selected>System</option>
-    <option value="../lib/fs.rrd">FileSystem</option>
-    <option value="../lib/kern.rrd">Kernel</option>
-  </select>
-  <button onclick="fname_update()">Update</button>
-
-    <hr>
-
-    <table id="infotable" border=1>
-        <tr><td colspan="21"><b>Javascript needed for this page to work</b></td></tr>
-	<tr><td><b>RRD file</b></td><td id="fname" colspan="5">None</td></tr>
-    </table>
-
-    <div id="mygraph"></div>
-
-    <script type="text/javascript">
-
+        <script type="text/javascript">
       // Remove the Javascript warning
-      document.getElementById("infotable").deleteRow(0);
-
+      function deleteJSWarnings(){
+        document.getElementById("infotable").deleteRow(0);
+      }  
       // fname and rrd_data are the global variable used by all the functions below
       fname=document.getElementById("input_fname").value;
       rrd_data=undefined;
@@ -109,6 +66,7 @@
       // this function is invoked when the RRD file name changes
       function fname_update() {
         fname=document.getElementById("input_fname").value;
+        fname="../lib/"+fname+".rrd";
         try {
           FetchBinaryURLAsync(fname,update_fname_handler);
         } catch (err) {
@@ -117,5 +75,38 @@
       }
 
     </script>
+  </head>
+
+  <body onLoad="deleteJSWarnings();">
+    <div class="container">
+
+
+        <legend>Flotronitx</legend>
+        <label>RRD Graphs</label>
+        <div class="input-append">
+        <select name="rrd file" class="span2" onchange="fname_update()" id="input_fname">
+          <option value="system"  selected>System</option>
+          <option value="fs">FileSystem</option>
+          <option value="kern">Kernel</option>
+        </select>
+        <button onclick="fname_update()" class="btn" type="button"><i class="icon-refresh"></i> Update</button>
+
+
+      </div>
+      <span class="help-block">Select the item you are interested in.</span>
+
+     
+        
+
+
+    <table id="infotable">
+        <tr><td colspan="21"><b>Javascript needed for this page to work</b></td></tr>
+        <tr><td><b>RRD file</b></td><td id="fname" colspan="5">None</td></tr>
+    </table>
+
+    <div id="mygraph"></div>
+
+
+  </div>
   </body>
 </html>
