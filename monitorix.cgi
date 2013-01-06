@@ -6407,7 +6407,7 @@ sub apache {
 
 			print("    <tr>\n");
 			print "      <td>\n";
-			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "       <font face='Verdana, sans-serif'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$url<b>\n";
 			print "       </font></font>\n";
@@ -7183,7 +7183,7 @@ sub lighttpd {
 
 			print("    <tr>\n");
 			print "      <td>\n";
-			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "       <font face='Verdana, sans-serif'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$url<b>\n";
 			print "       </font></font>\n";
@@ -7916,7 +7916,7 @@ sub mysql {
 
 			print("    <tr>\n");
 			print "      <td>\n";
-			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "       <font face='Verdana, sans-serif'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$str<b>\n";
 			print "       </font></font>\n";
@@ -11549,7 +11549,7 @@ sub bind {
 
 			print("    <tr>\n");
 			print "      <td>\n";
-			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "       <font face='Verdana, sans-serif'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b>&nbsp;&nbsp;<a href='" . $host . "' style='{color: $title_fg_color}'>$host</a><b>\n";
 			print "       </font></font>\n";
@@ -11945,7 +11945,7 @@ sub ntp {
 	
 			print("    <tr>\n");
 			print "      <td>\n";
-			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "       <font face='Verdana, sans-serif'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b style='{color: $title_fg_color}'>&nbsp;&nbsp;$host<b>\n";
 			print "       </font></font>\n";
@@ -12523,7 +12523,7 @@ sub icecast {
 	
 			print("    <tr>\n");
 			print "      <td>\n";
-			print "       <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "       <font face='Verdana, sans-serif'>\n";
 			print "       <font size='-1'>\n";
 			print "        <b>&nbsp;&nbsp;<a href='" . $url . "' style='{color: $title_fg_color}'>$url</a><b>\n";
 			print "       </font></font>\n";
@@ -13344,7 +13344,7 @@ sub multihost {
 			for($n2 = 0; $n2 < $MULTIHOST_IMGS_PER_ROW; $n2++) {
 				if($n < scalar(@HOST)) {
 					print "  <td>\n";
-					print "   <font face='Verdana, sans-serif' color='$fg_color'>\n";
+					print "   <font face='Verdana, sans-serif'>\n";
 					print "   <b>&nbsp;&nbsp;" . $HOST[$n] . "<b>\n";
 					print "   </font>\n";
 					print "  </td>\n";
@@ -13368,7 +13368,7 @@ sub multihost {
 				if($n < scalar(@HOST)) {
 				if($MULTIHOST_FOOTER) {
 					print "  <td>\n";
-					print "   <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+					print "   <font face='Verdana, sans-serif'>\n";
 					print "   <font size='-1'>\n";
 					print "    <b>&nbsp;&nbsp;<a href='" . $URL[$n] . $BASE_URL . "/' style='{color: $title_fg_color}'>$URL[$n]</a><b>\n";
 					print "   </font></font>\n";
@@ -13386,7 +13386,7 @@ sub multihost {
 		print "  <table cellspacing='5' cellpadding='0' width='1'>\n";
 		print "   <tr>\n";
 		print "    <td>\n";
-		print "    <font face='Verdana, sans-serif' color='$fg_color'>\n";
+		print "    <font face='Verdana, sans-serif'>\n";
 		print "    <b>&nbsp;&nbsp;" . $HOST[$val] . "<b>\n";
 		print "    </font>\n";
 		print "    </td>\n";
@@ -13399,7 +13399,7 @@ sub multihost {
 		print "   <tr>\n";
 		if($MULTIHOST_FOOTER) {
 			print "   <td>\n";
-			print "    <font face='Verdana, sans-serif' color='$title_fg_color'>\n";
+			print "    <font face='Verdana, sans-serif'>\n";
 			print "    <font size='-1'>\n";
 			print "    <b>&nbsp;&nbsp;<a href='" . $URL[$val] . "/monitorix/' style='{color: $title_fg_color}'>$URL[$val]</a><b>\n";
 			print "    </font></font>\n";
@@ -13455,7 +13455,7 @@ sub pc {
 		print("  <table cellspacing='5' cellpadding='0' width='1'>\n");
 		print("  <tr>\n");
 		print("  <td>\n");
-		print("  <font face='Verdana, sans-serif' color='$title_fg_color'>\n");
+		print("  <font face='Verdana, sans-serif'>\n");
 		print("    <b>&nbsp;&nbsp;Internet traffic and usage<b>\n");
 		print("  </font>\n");
 		print("  </td>\n");
@@ -13551,7 +13551,7 @@ sub pc {
 			print("  <table cellspacing='5' cellpadding='0' width='1'>\n");
 			print("  <tr>\n");
 			print("  <td>\n");
-			print("  <font face='Verdana, sans-serif' color='$title_fg_color'>\n");
+			print("  <font face='Verdana, sans-serif'>\n");
 			print("    <b>&nbsp;&nbsp;Internet traffic and usage<b>\n");
 			print("  </font>\n");
 			print("  </td>\n");
@@ -13656,7 +13656,7 @@ sub graph_header {
 	print("  <table cellspacing='5' cellpadding='0' width='1'>\n");
 	print("    <tr>\n");
 	print("      <td>\n");
-	print("        <font face='Verdana, sans-serif' color='$title_fg_color'>\n");
+	print("        <font face='Verdana, sans-serif'>\n");
 	print("          <b>&nbsp;&nbsp;$title<b>\n");
 	print("        </font>\n");
 	print("      </td>\n");
@@ -13690,7 +13690,7 @@ if(!$silent) {
 	print("  <tr>\n");
 	if(($val ne "all" || $val ne "group") && $mode ne "multihost") {
 		print("  <td>\n");
-		print("  <font face='Verdana, sans-serif' color='" . $title_fg_color . "'>\n");
+		print("  <font face='Verdana, sans-serif'>\n");
 		print("    <font size='5'><b>&nbsp;&nbsp;Host:&nbsp;<b></font>\n");
 		print("  </font>\n");
 		print("  </td>\n");
@@ -13699,13 +13699,13 @@ if(!$silent) {
 		my $gnum = substr($val, 5, length($val));
 		my $gname = $REMOTEGROUP_LIST[2 * $gnum];
 		print("  <td>\n");
-		print("  <font face='Verdana, sans-serif' color='" . $title_fg_color . "'>\n");
+		print("  <font face='Verdana, sans-serif'>\n");
 		print("    <font size='5'><b>&nbsp;&nbsp;$gname&nbsp;<b></font>\n");
 		print("  </font>\n");
 		print("  </td>\n");
 	}
 	print("  <td>\n");
-	print("  <font face='Verdana, sans-serif' color='" . $fg_color . "'>\n");
+	print("  <font face='Verdana, sans-serif'>\n");
 	if($mode eq "localhost" || $mode eq "pc") {
 		$title = $HOSTNAME;
 	} elsif($mode eq "multihost") {
@@ -13728,13 +13728,13 @@ if(!$silent) {
 	print("  </font>\n");
 	print("  </td>\n");
 		print("  <td>\n");
-		print("  <font face='Verdana, sans-serif' color='" . $title_fg_color . "'>\n");
+		print("  <font face='Verdana, sans-serif'>\n");
 		print("    <font size='5'><b>&nbsp;&nbsp;last&nbsp;$twhen&nbsp;&nbsp;<b></font>\n");
 		print("  </font>\n");
 		print("  </td>\n");
 	print("  </tr>\n");
 	print("  </table>\n");
-	print("  <font face='Verdana, sans-serif' color='" . $fg_color . "'>\n");
+	print("  <font face='Verdana, sans-serif'>\n");
 	print("    <h4><font color='#888888'>" . strftime("%a %b %e %H:%M:%S %Z %Y", localtime) . "</font></h4>\n");
 }
 
@@ -13761,7 +13761,7 @@ if(!$silent) {
 	print("  <p>\n");
 	print("  <a href='http://www.monitorix.org'><img src='" . $URL . "logo_bot.png' border='0'></a>\n");
 	print("  <br>\n");
-	print("  <font face='Verdana, sans-serif' color='" . $fg_color . "' size='-2'>\n");
+	print("  <font face='Verdana, sans-serif' size='-2'>\n");
 	print("Copyright &copy; 2005-2012 Jordi Sanfeliu\n");
 	print("  </font>\n");
 	print("  </body>\n");
