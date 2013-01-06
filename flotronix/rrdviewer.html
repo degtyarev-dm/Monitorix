@@ -19,10 +19,7 @@
     <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
         <script type="text/javascript">
-      // Remove the Javascript warning
-      function deleteJSWarnings(){
-        document.getElementById("infotable").deleteRow(0);
-      }  
+ 
       // fname and rrd_data are the global variable used by all the functions below
       fname=document.getElementById("input_fname").value;
       rrd_data=undefined;
@@ -30,8 +27,6 @@
       // This function updates the Web Page with the data from the RRD archive header
       // when a new file is selected
       function update_fname() {
-        // Finally, update the file name and enable the update button
-        document.getElementById("fname").firstChild.data=fname;
 
         var graph_opts={legend: { noColumns:4}};
         var ds_graph_opts={'Oscilator':{ color: "#ff8000", 
@@ -77,36 +72,33 @@
     </script>
   </head>
 
-  <body onLoad="deleteJSWarnings();">
+  <body onLoad="fname_update();">
     <div class="container">
 
-
-        <legend>Flotronitx</legend>
-        <label>RRD Graphs</label>
-        <div class="input-append">
-        <select name="rrd file" class="span2" onchange="fname_update()" id="input_fname">
-          <option value="system"  selected>System</option>
-          <option value="fs">FileSystem</option>
-          <option value="kern">Kernel</option>
-        </select>
-        <button onclick="fname_update()" class="btn" type="button"><i class="icon-refresh"></i> Update</button>
-
-
+      <div class="row">
+        <div class="span4 offset4">
+              <legend>Flotronitx</legend>
+              <label>RRD Graphs</label>
+              <div class="input-append">
+              <select name="rrd file" class="span2" onchange="fname_update()" id="input_fname">
+                <option value="system"  selected>System</option>
+                <option value="fs">FileSystem</option>
+                <option value="kern">Kernel</option>
+                <option value="net">Network</option>
+                <option value="int">Int</option>
+                <option value="port">Port</option>
+                <option value="proc">Proc</option>
+                <option value="serv">Serv</option>
+                <option value="user">User</option>
+              </select>
+              <button onclick="fname_update()" class="btn" type="button"><i class="icon-refresh"></i> Update</button>
+            </div>
+            <span class="help-block">Select the item you are interested in.</span>
+        </div>
       </div>
-      <span class="help-block">Select the item you are interested in.</span>
 
-     
-        
-
-
-    <table id="infotable">
-        <tr><td colspan="21"><b>Javascript needed for this page to work</b></td></tr>
-        <tr><td><b>RRD file</b></td><td id="fname" colspan="5">None</td></tr>
-    </table>
-
-    <div id="mygraph"></div>
-
-
-  </div>
+      <legend>Graphs</legend>
+      <div id="mygraph"></div>
+    </div>
   </body>
 </html>
