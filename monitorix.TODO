@@ -3,7 +3,8 @@ Bootstrap design
  ✔ change index.html generater @done (12-12-31 17:51)
  ✔ change cgi script @done (12-12-31 19:22)
 RRD to JS
- ☐ add javascriptRRD support
+ ✔ add javascriptRRD support @done (13-01-07 10:49)
+ ☐ change DC names in rrd files
 Configurater
  ☐ create web-configurater
  General

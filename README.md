@@ -7,6 +7,7 @@ TODO
 ---------
 - twitter-bootstrap design
 - migrate to javascriptRRD
+- create web-configurater
 - make TheWorld better
 
 Community
